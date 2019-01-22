@@ -93,6 +93,7 @@ def L2X(args):
 			args.original, 
 			args.mask
 		)
+
 	else:
 		gumbel_selector = Gumbel_Selection(
 			args.num_feats, 

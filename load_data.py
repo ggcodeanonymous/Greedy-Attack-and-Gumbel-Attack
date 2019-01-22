@@ -11,13 +11,16 @@ from imdbcnn.imdb_data import create_imdb_dataset
 
 
 class Data():
-	def __init__(self, data, train = False):
+	def __init__(self, data, train = False, no_samples = 125):
 		if data == 'imdbcnn':
 			if 'data' not in os.listdir('./imdbcnn'):
 				os.mkdir('./imdbcnn/data')
-
 			data_dir = './imdbcnn/data'
-			
+			if 'models' not in os.listdir('./imdbcnn'):
+				os.mkdir('./imdbcnn/models')
+			if 'results' not in os.listdir('./imdbcnn'):
+				os.mkdir('./imdbcnn/results')
+
 			if 'pred_val.npy' in os.listdir(data_dir):
 				self.pred_train = np.load('{}/pred_train.npy'.format(data_dir))
 				self.pred_val = np.load('{}/pred_val.npy'.format(data_dir))
@@ -62,13 +65,17 @@ class Data():
 				self.id_to_word = id_to_word 
 			self.x_train = x_train
 			self.y_train = y_train
-			self.x_val = x_val if train else x_val[:125] 
-			self.y_val = y_val if train else y_val[:125] 
+			self.x_val = x_val if train else x_val[:no_samples] 
+			self.y_val = y_val if train else y_val[:no_samples] 
 			
 		elif data == 'agccnn':
 			data_dir = './agccnn/data'
 			if 'data' not in os.listdir('./agccnn'):
 				os.mkdir(data_dir)
+			if 'models' not in os.listdir('./agccnn'):
+				os.mkdir('./agccnn/models')
+			if 'results' not in os.listdir('./agccnn'):
+				os.mkdir('./agccnn/results')
 
 			if 'x_val.npy' in os.listdir(data_dir):
 				x_val, y_val = np.load('{}/x_val.npy'.format(data_dir)), np.load('{}/y_val.npy'.format(data_dir))
@@ -97,11 +104,16 @@ class Data():
 
 			self.x_train = x_train
 			self.y_train = y_train
-			self.x_val = x_val if train else x_val[:2000] 
-			self.y_val = y_val if train else y_val[:2000] 
+			self.x_val = x_val if train else x_val[:no_samples] 
+			self.y_val = y_val if train else y_val[:no_samples] 
 
 		elif data == 'yahoolstm': 
+
 			data_dir = 'yahoolstm/data' 
+			if 'models' not in os.listdir('./yahoolstm'):
+				os.mkdir('./yahoolstm/models')
+			if 'results' not in os.listdir('./yahoolstm'):
+				os.mkdir('./yahoolstm/results')
 
 			if 'x_test.npy' not in os.listdir(data_dir):
 				print('Processing text dataset...')  
@@ -143,10 +155,10 @@ class Data():
 				np.random.seed(0)
 				idx = np.random.permutation(60000)
 				x_val, y_val = x_val[idx], y_val[idx]
-				x_val, y_val = x_val[:500], y_val[:500]
+				x_val, y_val = x_val[:no_samples], y_val[:no_samples]
 				val_len = np.load('yahoolstm/data/len_test.npy')
 				val_len = np.minimum(val_len, 400)
-				val_len = val_len[idx][:500]
+				val_len = val_len[idx][:no_samples]
 				self.val_len = val_len
 
 			self.x_val = x_val 

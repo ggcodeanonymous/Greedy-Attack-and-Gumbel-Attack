@@ -249,7 +249,7 @@ if __name__ == '__main__':
 		default = 'greedy_change_k'
 	)
 	parser.add_argument('--num_feats', type = int, default = 10)
-	parser.add_argument('--max_words', type = int, default = 500)
+	parser.add_argument('--max_words', type = int, default = 69)
 	parser.add_argument('--train', action='store_true')
 	parser.add_argument('--original', action='store_true')
 	parser.add_argument('--mask', action='store_true')
