@@ -10,54 +10,46 @@ The code runs with Python 2.7 and requires Tensorflow 1.2.1, Keras 2.1.5 and nlt
 - `nltk`
 - `keras`
 
-## Training of the target model. 
-Train a word-based CNN model for IMDB data set.
-```shell
-python score.py --data imdbcnn  --method training
-```
+## AG's News data set with a trained model
+For ease of replication, the AG's News data set and a trained character-level convolutional networks (Char-CNN) are provided. Please cite [Character-level convolutional networks for text classification](http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classifica) for the data and the model in research. 
 
 ## Generation of Greedy Attack adversarial examples
-Generate the Greedy Attack adversarial examples for IMDB with the word-based CNN model.
+Generate the Greedy Attack adversarial examples for Char-CNN on AG's News.
 
 First stage: search for the most important k features
 ```shell
-python score.py --data imdbcnn  --method leave_one_out --num_feats 10
+python score.py --data agccnn  --method leave_one_out --num_feats 10
 ```
 Second stage: search for values to replace the selected k features
 ```shell
-python change.py --data imdbcnn --method leave_one_out --num_feats 10 --changing_way greedy_change_k 
+python change.py --data agccnn --method leave_one_out --num_feats 10 --changing_way greedy_change_k 
 ```
 
 ## Generation of Gumbel Attack adversarial examples
-Generate the Gumbel Attack adversarial examples for IMDB data set with the word-based CNN model.
+Generate the Gumbel Attack adversarial examples for Char-CNN on AG's News.
 
 Generate predictions for training of Gumbel Attack.
 ```shell
-python score.py --data imdbcnn --method create_predictions
+python score.py --data agccnn --method create_predictions
 ```
 
 Train first-stage Gumbel Attack. 
 ```shell
-python score.py --data imdbcnn --method L2X --num_feats 5 --original --mask --train
+python score.py --data agccnn --method L2X --num_feats 5 --original --mask --train
 ```
 
 Apply first-stage Gumbel Attack on both training and test sets.
 ```shell
-python score.py --data imdbcnn --method L2X --num_feats 5 --original --mask --train_score
-python score.py --data imdbcnn --method L2X --num_feats 5 --original --mask 
+python score.py --data agccnn --method L2X --num_feats 5 --original --mask --train_score
+python score.py --data agccnn --method L2X --num_feats 5 --original --mask 
 ```
 
 Train second-stage Gumbel Attack.
 ```shell
-python change.py --data imdbcnn --method L2X --num_feats 5 --original --mask --changing_way gumbel --train
+python change.py --data agccnn --method L2X --num_feats 5 --original --mask --changing_way gumbel --train
 ```
 
 Create adversarial examples.
 ```shell
-python change.py --data imdbcnn --method L2X --num_feats 5 --original --mask --changing_way gumbel
+python change.py --data agccnn --method L2X --num_feats 5 --original --mask --changing_way gumbel
 ```
-
-## Other data sets
-To generate adversarial examples for AG’s News corpus with a character-based CNN, replace 'imdbcnn' with 'agccnn' and add '--max_words 69' as there are 69 characters in total.
-
-To generate adversarial examples for Yahoo! Answers with an LSTM, replace 'imdbcnn' with 'yahoolstm' respectively. 
