@@ -13,9 +13,7 @@ The code runs with Python 2.7 and requires Tensorflow 1.2.1, Keras 2.1.5 and nlt
 ## AG's News data set with a trained model
 For ease of replication, the AG's News data set and a trained character-level convolutional networks (Char-CNN) are provided. Please cite [Character-level convolutional networks for text classification](http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classifica) for the data and the model. 
 
-The AG's News data set can be downloaded [here](https://drive.google.com/open?id=0Bz8a_Dbh9QhbUDNpeUdjb0wxRms). Please put the folder in the directory agccnn/data/ and unzip it. See below for details.
-
-The weights of a trained character-level convolutional networks (Char-CNN) can be downloaded [here](https://drive.google.com/open?id=1dkt_sfRPJzQO3uMA4afcSRgNMFfOrk3M). Please put the file in the directory agccnn/params/.
+The AG's News data set can be downloaded [here](https://drive.google.com/open?id=0Bz8a_Dbh9QhbUDNpeUdjb0wxRms). Please put the folder in the directory agccnn/data/ and unzip it. The weights of a trained character-level convolutional networks (Char-CNN) can be downloaded [here](https://drive.google.com/open?id=1dkt_sfRPJzQO3uMA4afcSRgNMFfOrk3M). Please put the file in the directory agccnn/params/.
 
 ## Generation of Greedy Attack adversarial examples
 Generate the Greedy Attack adversarial examples for Char-CNN on AG's News.
