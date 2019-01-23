@@ -7,12 +7,12 @@ except:
 	import _pickle as pickle
 import os
 import sys
-from imdbcnn.imdb_data import create_imdb_dataset
 
 
 class Data():
 	def __init__(self, data, train = False, no_samples = 125):
 		if data == 'imdbcnn':
+			from imdbcnn.imdb_data import create_imdb_dataset
 			if 'data' not in os.listdir('./imdbcnn'):
 				os.mkdir('./imdbcnn/data')
 			data_dir = './imdbcnn/data'
