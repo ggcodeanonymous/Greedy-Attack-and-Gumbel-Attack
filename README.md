@@ -18,11 +18,11 @@ The AG's News data set can be downloaded [here](https://drive.google.com/open?id
 ## Generation of Greedy Attack adversarial examples
 Generate the Greedy Attack adversarial examples for Char-CNN on AG's News.
 
-First stage: search for the most important k features
+First stage: search for the most important k features.
 ```shell
 python score.py --data agccnn  --method leave_one_out --num_feats 10
 ```
-Second stage: search for values to replace the selected k features
+Second stage: search for values to replace the selected k features.
 ```shell
 python change.py --data agccnn --method leave_one_out --num_feats 10 --changing_way greedy_change_k 
 ```
